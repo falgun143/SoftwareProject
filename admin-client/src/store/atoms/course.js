@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {atom} from "recoil";
 
 export const courseState = atom({
@@ -7,3 +8,4 @@ export const courseState = atom({
     course: null
   },
 });
+

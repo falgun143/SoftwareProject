@@ -9,15 +9,15 @@ export const Landing = () => {
     const navigate = useNavigate()
     const userEmail = useRecoilValue(userEmailState);
     const userLoading = useRecoilValue(isUserLoading);
-    return <div>
-        <Grid container style={{padding: "5vw"}}>
+    return <div   style={{boxSizing: "border-box"}}  >
+        <Grid container style={{padding: "5vw"}}  >
             <Grid item xs={12} md={6} lg={6}>
                 <div style={{marginTop: 100}}>
                     <Typography variant={"h2"}>
-                        Coursera Admin
+                        Task Manager 
                     </Typography>
                     <Typography variant={"h5"}>
-                        A place to learn, earn and grow
+                        A place to manage Tasks.
                     </Typography>
                     {!userLoading && !userEmail && <div style={{display: "flex", marginTop: 20}}>
                         <div style={{marginRight: 10}}>
@@ -43,8 +43,8 @@ export const Landing = () => {
                 <div>
                 </div>
             </Grid>
-            <Grid item xs={12} md={6} lg={6}  style={{marginTop: 20}}>
-                <img src={"/class.jpeg"} width={"100%"} />
+            <Grid item xs={12} md={6} lg={6}    style={{marginTop: 20}}>
+                <img src={"/task.png"} width={"70%"} height={"80%"} />
             </Grid>
         </Grid>
     </div>

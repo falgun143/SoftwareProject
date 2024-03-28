@@ -21,7 +21,7 @@ function Signin() {
                 justifyContent: "center"
             }}>
                 <Typography variant={"h6"}>
-                Welcome to Coursera. Sign up below
+                Welcome to TaskManager. Sign up below
                 </Typography>
             </div>
         <div style={{display: "flex", justifyContent: "center"}}>
@@ -60,7 +60,6 @@ function Signin() {
                             }
                         });
                         const data = res.data;
-
                         localStorage.setItem("token", data.token);
                         // window.location = "/"
                         setUser({

@@ -56,20 +56,27 @@ function GrayTopper() {
             </div>
         </div>
     </div>
+
 }
+
+// title: title,
+// description: description,
+// imageLink: imageLink,
+// referencelink:referencelink,
+// deadline:deadline
 
 function UpdateCard() {
     const [courseDetails, setCourse] = useRecoilState(courseState);
-
     const [title, setTitle] = useState(courseDetails.course.title);
     const [description, setDescription] = useState(courseDetails.course.description);
-    const [image, setImage] = useState(courseDetails.course.imageLink);
-    const [price, setPrice] = useState(courseDetails.course.price);
+    const [imageLink, setImage] = useState(courseDetails.course.imageLink);
+    const[deadline, setDeadline] = useState(courseDetails.course.deadline);
+   
 
     return <div style={{display: "flex", justifyContent: "center"}}>
     <Card varint={"outlined"} style={{maxWidth: 600, marginTop: 200}}>
         <div style={{padding: 20}}>
-            <Typography style={{marginBottom: 10}}>Update course details</Typography>
+            <Typography style={{marginBottom: 10}}>Update Task details</Typography>
             <TextField
                 value={title}
                 style={{marginBottom: 10}}
@@ -93,7 +100,7 @@ function UpdateCard() {
             />
 
             <TextField
-                value={image}
+                value={imageLink}
                 style={{marginBottom: 10}}
                 onChange={(e) => {
                     setImage(e.target.value)
@@ -103,13 +110,13 @@ function UpdateCard() {
                 variant="outlined"
             />
             <TextField
-                value={price}
+                value={deadline}
                 style={{marginBottom: 10}}
                 onChange={(e) => {
-                    setPrice(e.target.value)
+                    setDeadline(e.target.value)
                 }}
                 fullWidth={true}
-                label="Price"
+                label="DeadLine"
                 variant="outlined"
             />
 
@@ -119,9 +126,8 @@ function UpdateCard() {
                     axios.put(`${BASE_URL}/admin/courses/` + courseDetails.course._id, {
                         title: title,
                         description: description,
-                        imageLink: image,
-                        published: true,
-                        price
+                        imageLink: imageLink,
+                       deadline:deadline
                     }, {
                         headers: {
                             "Content-type": "application/json",
@@ -132,12 +138,13 @@ function UpdateCard() {
                         _id: courseDetails.course._id,
                         title: title,
                         description: description,
-                        imageLink: image,
-                        price
+                        imageLink: imageLink,
+                        deadline:deadline
+                        
                     };
                     setCourse({course: updatedCourse, isLoading: false});
                 }}
-            > Update course</Button>
+            > Update Task</Button>
         </div>
     </Card>
 </div>
@@ -160,23 +167,12 @@ function CourseCard(props) {
         <img src={imageLink} style={{width: 350}} ></img>
         <div style={{marginLeft: 10}}>
             <Typography variant="h5">{title}</Typography>
-            <Price />
+            
         </div>
     </Card>
     </div>
 }
 
-function Price() {
 
-    const price = useRecoilValue(coursePrice);
-    return <>
-        <Typography variant="subtitle2" style={{color: "gray"}}>
-            Price
-        </Typography>
-        <Typography variant="subtitle1">
-            <b>Rs {price} </b>
-        </Typography>
-    </>
-}
 
 export default Course;

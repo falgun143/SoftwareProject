@@ -7,8 +7,9 @@ import { BASE_URL } from "../config.js"
 function AddCourse() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [image, setImage] = useState("");
-    const [price, setPrice] = useState(0)
+    const [imageLink, setImage] = useState("");
+    const [referencelink, setReference] = useState("");
+    const [deadline, setDeadline] = useState("");
 
     return <div style={{display: "flex", justifyContent: "center", minHeight: "80vh", justifyContent: "center", flexDirection: "column"}}>
         <div style={{display: "flex", justifyContent: "center"}}>
@@ -46,10 +47,20 @@ function AddCourse() {
                 <TextField
                     style={{marginBottom: 10}}
                     onChange={(e) => {
-                        setPrice(e.target.value)
+                        setReference(e.target.value)
                     }}
                     fullWidth={true}
-                    label="Price"
+                    label="Refrence Link"
+                    variant="outlined"
+                />
+
+                    <TextField
+                    style={{marginBottom: 10}}
+                    onChange={(e) => {
+                        setDeadline(e.target.value)
+                    }}
+                    fullWidth={true}
+                    label="DeadLine"
                     variant="outlined"
                 />
 
@@ -60,17 +71,18 @@ function AddCourse() {
                         await axios.post(`${BASE_URL}/admin/courses`, {
                             title: title,
                                 description: description,
-                                imageLink: image,
-                                published: true,
-                                price
+                                imageLink: imageLink,
+                                referencelink:referencelink,
+                               deadline:deadline
+
                         }, {
                             headers: {
                                 "Authorization": "Bearer " + localStorage.getItem("token")
                             }
                         });
-                        alert("Added course!");
+                        alert("Added Task!");
                     }}
-                > Add course</Button>
+                > Add Task</Button>
             </Card>
         </div>
     </div>

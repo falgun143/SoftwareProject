@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const z= require("zod");
 const express = require('express');
 const { User, Course, Admin } = require("../db");
 const jwt = require('jsonwebtoken');
@@ -7,7 +8,23 @@ const { authenticateJwt } = require("../middleware/auth");
 
 const router = express.Router();
 
+
+const InputProps = z.object({
+  username: z.string(),
+  password: z.string()
+});
+
+
 router.get("/me", authenticateJwt, async (req, res) => {
+    
+  const parsedinput=InputProps.safeParse(req.body);
+  if(!parsedinput.success){
+    return res.status(411).json({
+      msg:parsedinput.error
+    })
+  }
+
+
     const admin = await Admin.findOne({ username: req.user.username });
     if (!admin) {
       res.status(403).json({msg: "Admin doesnt exist"})
@@ -50,9 +67,10 @@ router.post('/signup', (req, res) => {
   router.post('/courses', authenticateJwt, async (req, res) => {
     const course = new Course(req.body);
     await course.save();
-    res.json({ message: 'Course created successfully', courseId: course.id });
+    res.json({ message: 'Task created successfully', courseId: course.id });
   });
   
+
   router.put('/courses/:courseId', authenticateJwt, async (req, res) => {
     const course = await Course.findByIdAndUpdate(req.params.courseId, req.body, { new: true });
     if (course) {
@@ -62,6 +80,7 @@ router.post('/signup', (req, res) => {
     }
   });
   
+
   router.get('/courses', authenticateJwt, async (req, res) => {
     const courses = await Course.find({});
     res.json({ courses });

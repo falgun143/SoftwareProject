@@ -26,7 +26,7 @@ function Appbar({}) {
             <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
                 navigate("/")
             }}>
-                <Typography variant={"h6"}>Coursera</Typography>
+                <Typography variant={"h6"}>TaskManager</Typography>
             </div>
     
             <div style={{display: "flex"}}>
@@ -36,7 +36,7 @@ function Appbar({}) {
                             onClick={() => {
                                 navigate("/addcourse")
                             }}
-                        >Add course</Button>
+                        >Add Task</Button>
                     </div>
 
                     <div style={{marginRight: 10}}>
@@ -44,7 +44,7 @@ function Appbar({}) {
                             onClick={() => {
                                 navigate("/courses")
                             }}
-                        >Courses</Button>
+                        >Tasks</Button>
                     </div>
 
                     <Button
@@ -64,13 +64,17 @@ function Appbar({}) {
         return <div style={{
             display: "flex",
             justifyContent: "space-between",
-            padding: 4,
-            zIndex: 1
+            padding:50,
+            zIndex: 1,
+            boxSizing: "border-box"
         }}>
-            <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
+            <div style={{marginLeft: 10, cursor: "pointer",display: "flex",justifyContent: "center",flexDirection: "column"}} onClick={() => {
                 navigate("/")
             }}>
-                <Typography variant={"h6"}>Coursera</Typography>
+             
+             <img src={"/logo.png"} width={"25%"} />
+                
+                <Typography variant={"h6"}>TaskManager</Typography>
             </div>
     
             <div style={{display: "flex"}}>
